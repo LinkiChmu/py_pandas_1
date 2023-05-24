@@ -12,7 +12,6 @@ df_movies = pd.read_csv('movies.csv', index_col='movieId')  # column 'movieId' a
 rating_5 = df_ratings[df_ratings.rating == 5.0]  # separate the movies with rating 5.0
 
 best_movieId = rating_5['movieId'].value_counts() \
-    .sort_values(ascending=False) \
     .index[0]  # index('movieId') of first row as max value after grouping by 'movieId' and count aggregation
 
 movie_name = df_movies[df_movies.index == best_movieId].title
