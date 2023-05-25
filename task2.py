@@ -10,7 +10,7 @@ df = pd.read_csv('power.csv')
 
 df['isBaltic'] = df['country'].isin(['Lithuania', 'Latvia', 'Estonia'])
 df['validCategory'] = (df['category'] == 4) | (df['category'] == 12) | (df['category'] == 21)
-df['validYear'] = (df['year'] >= 2005) & (df['year'] <= 2010)
+df['validYear'] = df['year'].between(2005, 2010)
 
 df.query('isBaltic and validCategory and validYear', inplace=True)
 
