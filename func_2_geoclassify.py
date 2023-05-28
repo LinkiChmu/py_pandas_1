@@ -13,7 +13,7 @@ def geo_classify(query):
     Otherwise, it returns 'undefined'.
     Rules for distribution by region according to the dictionary 'geo_data'.
     """
-    for word in re.findall(r'[а-я]{3,}', query, re.I):
+    for word in re.findall(r'[а-я]{3,}', query, re.I):  # words, consisting of 3 or more letters
         for region, cities in geo_data.items():
             if word in cities:
                 return region

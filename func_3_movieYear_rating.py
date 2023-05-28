@@ -1,6 +1,5 @@
 import pandas as pd
 
-
 years = list(range(1950, 2011))  # list of years from 1950 to 2010 inclusive
 
 
@@ -19,12 +18,13 @@ def main():
     movies_df = pd.read_csv('movies.csv')
     ratings_df = pd.read_csv('ratings.csv')
 
-    movies_df['year'] = movies_df.title.apply(production_year)  # add the column 'year'
+    merged = ratings_df.merge(movies_df, on='movieId', how='left')
 
-    merged = movies_df.merge(ratings_df, on='movieId', how='outer')[['year', 'rating']]  # take only year and rating
-    avg_rating_year = merged.groupby('year').mean().sort_values('rating', ascending=False)
+    merged['year'] = merged.title.apply(production_year)  # add the column 'year'
 
-    print(avg_rating_year)
+    avg_rating_year = merged[['year', 'rating']].groupby('year').mean().sort_values('rating', ascending=False)
+
+    print(avg_rating_year.head(10))
 
 
 main()
